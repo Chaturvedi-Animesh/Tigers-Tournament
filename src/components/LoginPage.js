@@ -28,6 +28,16 @@ function LoginPage(){
             })
         }
 
+        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value))){
+
+            setUserDetails({
+                ...userDetails,
+                emailError: true,
+                email: event.target.value
+            })
+        }
+
+
     }
     if(event.target.id === 'loginPassword'){
         setUserDetails({
@@ -42,6 +52,7 @@ function LoginPage(){
                 password: ''
             })
         }
+        
     }
     }
 
@@ -70,8 +81,9 @@ function LoginPage(){
                 label="Email Id"
                 value={userDetails.email}
                 onChange={handleOnChange}
-                helperText={userDetails.emailError ? "Email is required" : ""}
-                error = {userDetails.emailError} /> 
+                helperText={userDetails.emailError ? "Invalid Email" : ""}
+                error = {userDetails.emailError}
+                onBlur= {handleOnChange} /> 
 
                 {/* Password TextField */}
                 <TextField
@@ -81,6 +93,7 @@ function LoginPage(){
                 label="Password"
                 value={userDetails.password}
                 onChange={handleOnChange} 
+                onBlur= {handleOnChange}
                 helperText={userDetails.passwordError ? "Password is required" : ""}
                 error = {userDetails.passwordError}
                 />
