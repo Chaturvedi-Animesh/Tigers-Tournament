@@ -28,7 +28,7 @@ function LoginPage(){
             })
         }
 
-        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value))){
+        if(!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value))){
 
             setUserDetails({
                 ...userDetails,
