@@ -20,13 +20,12 @@ function Register() {
 
   const [error, setError] = useState({
     nameError: "",
-    emailError : "",
+    emailError: "",
     passwordError: "",
-    ageError: ""
+    ageError: "",
   });
 
-  const [isDisabled,setIsDisabled] = useState(true)
- 
+  const [isDisabled, setIsDisabled] = useState(true);
 
   function handleOnChange(event) {
     setUserDetails({
@@ -36,97 +35,97 @@ function Register() {
   }
 
   function handleOnBlur(event) {
-    if(event.target.name === "name"){
-        if(userDetails.name === "") {
-            setError({
-                ...error,
-                nameError : "Name Cannot be Empty"
-            })
-        }
-        else{
-            setError({
-                ...error,
-                nameError : ""
-            })
-        }
+    if (event.target.name === "name") {
+      if (userDetails.name === "") {
+        setError({
+          ...error,
+          nameError: "Name Cannot be Empty",
+        });
+      } else {
+        setError({
+          ...error,
+          nameError: "",
+        });
+      }
     }
 
-    if(event.target.name === "email"){
-        if(userDetails.email === "") {
-            setError({
-                ...error,
-                emailError : "Email Cannot be Empty"
-            })
-        }
-        else if(!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userDetails.email))){
-            setError({
-                ...error,
-                emailError : "Wrong Email Format"
-            })
-        }
-        else{
-            setError({
-                ...error,
-                emailError : ""
-            })
-        }
+    if (event.target.name === "email") {
+      if (userDetails.email === "") {
+        setError({
+          ...error,
+          emailError: "Email Cannot be Empty",
+        });
+      } else if (
+        !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(userDetails.email)
+      ) {
+        setError({
+          ...error,
+          emailError: "Wrong Email Format",
+        });
+      } else {
+        setError({
+          ...error,
+          emailError: "",
+        });
+      }
     }
-    if(event.target.name === "password"){
-        if(userDetails.password === "") {
-            setError({
-                ...error,
-                passwordError : "Password Cannot be Empty"
-            })
-        }
-        else{
-            setError({
-                ...error,
-                passwordError : ""
-            })
-        }
-    }
-
-    if(event.target.name === "age"){
-        if(userDetails.age === "") {
-            setError({
-                ...error,
-                ageError : "Age Cannot be Empty"
-            })
-        }
-        else if( parseInt(userDetails.age) <= 0){
-            setError({
-                ...error,
-                ageError : "Age Cannot be Less than 1"
-            })
-        }
-        else{
-            setError({
-                ...error,
-                ageError : ""
-            })
-        }
+    if (event.target.name === "password") {
+      if (userDetails.password === "") {
+        setError({
+          ...error,
+          passwordError: "Password Cannot be Empty",
+        });
+      } else {
+        setError({
+          ...error,
+          passwordError: "",
+        });
+      }
     }
 
-    if(Object.values(error).every(x => x==="")){
-        setIsDisabled(false)
-    }
-    if(userDetails.name === "" || userDetails.password === "" || userDetails.age === "" || userDetails.email === ""){
-        setIsDisabled(true)
+    if (event.target.name === "age") {
+      if (userDetails.age === "") {
+        setError({
+          ...error,
+          ageError: "Age Cannot be Empty",
+        });
+      } else if (parseInt(userDetails.age) <= 0) {
+        setError({
+          ...error,
+          ageError: "Age Cannot be Less than 1",
+        });
+      } else {
+        setError({
+          ...error,
+          ageError: "",
+        });
+      }
     }
 
+    if (Object.values(error).every((x) => x === "")) {
+      setIsDisabled(false);
+    }
+    if (
+      userDetails.name === "" ||
+      userDetails.password === "" ||
+      userDetails.age === "" ||
+      userDetails.email === ""
+    ) {
+      setIsDisabled(true);
+    }
   }
 
   function handleOnSubmit() {
     console.log(userDetails);
-    console.log(Object.values(error).every(x => x===""))
+    console.log(Object.values(error).every((x) => x === ""));
   }
 
-//   const isDisabled = () =>{
-//     console.log(Object.values(error).every(x => x===""))
-//     if(Object.values(error).every(x => x==="")) return false
+  //   const isDisabled = () =>{
+  //     console.log(Object.values(error).every(x => x===""))
+  //     if(Object.values(error).every(x => x==="")) return false
 
-//     return true
-//   }
+  //     return true
+  //   }
 
   return (
     <Card
@@ -154,8 +153,8 @@ function Register() {
           value={userDetails.name}
           onChange={handleOnChange}
           helperText={error.nameError}
-          error={error.nameError === ""?false:true}
-          onBlur= {handleOnBlur}
+          error={error.nameError === "" ? false : true}
+          onBlur={handleOnBlur}
         />
 
         {/* Email TextField */}
@@ -166,8 +165,8 @@ function Register() {
           value={userDetails.email}
           onChange={handleOnChange}
           helperText={error.emailError}
-          error={error.emailError === ""?false:true}
-          onBlur= {handleOnBlur}
+          error={error.emailError === "" ? false : true}
+          onBlur={handleOnBlur}
         />
 
         {/* PasswordTextfiled */}
@@ -180,8 +179,8 @@ function Register() {
           value={userDetails.password}
           onChange={handleOnChange}
           helperText={error.passwordError}
-          error={error.passwordError === ""?false:true}
-          onBlur= {handleOnBlur}
+          error={error.passwordError === "" ? false : true}
+          onBlur={handleOnBlur}
         />
 
         {/* Age TextField                  */}
@@ -193,8 +192,8 @@ function Register() {
           value={userDetails.age}
           onChange={handleOnChange}
           helperText={error.ageError}
-          error={error.ageError === ""?false:true}
-          onBlur= {handleOnBlur}
+          error={error.ageError === "" ? false : true}
+          onBlur={handleOnBlur}
         />
 
         {/* address TextField */}
