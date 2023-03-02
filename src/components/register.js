@@ -120,12 +120,6 @@ function Register() {
     console.log(Object.values(error).every((x) => x === ""));
   }
 
-  //   const isDisabled = () =>{
-  //     console.log(Object.values(error).every(x => x===""))
-  //     if(Object.values(error).every(x => x==="")) return false
-
-  //     return true
-  //   }
 
   return (
     <Card
