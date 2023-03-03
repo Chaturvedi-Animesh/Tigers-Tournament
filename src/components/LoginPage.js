@@ -18,7 +18,7 @@ function LoginPage() {
     passwordError: "",
   });
 
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isDisabled, setIsDisabled] = useState(true);
 
   function handleOnChange(event) {
     setUserDetails({
@@ -34,12 +34,11 @@ function LoginPage() {
           ...error,
           emailError: "Email cannot be empty",
         });
-      }
-      else{
+      } else {
         setError({
-            ...error,
-            emailError: "",
-          });
+          ...error,
+          emailError: "",
+        });
       }
     }
     if (event.target.name === "password") {
@@ -48,22 +47,20 @@ function LoginPage() {
           ...error,
           passwordError: "Password cannot be empty",
         });
-      }
-      else{
+      } else {
         setError({
-            ...error,
-            passwordError: "",
-          });
+          ...error,
+          passwordError: "",
+        });
       }
     }
 
     if (Object.values(error).every((x) => x === "")) {
-        setIsDisabled(true);
-      }
-      if(Object.values(userDetails).indexOf("")==-1){
-
-        setIsDisabled(false);
-      }
+      setIsDisabled(true);
+    }
+    if (Object.values(userDetails).indexOf("") === -1) {
+      setIsDisabled(false);
+    }
   }
 
   function handleOnSubmit() {
