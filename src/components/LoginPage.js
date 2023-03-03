@@ -1,111 +1,132 @@
-import { Button, Card, CardContent, CardHeader, TextField } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 
+function LoginPage() {
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+  });
 
-function LoginPage(){
+  const [error, setError] = useState({
+    emailError: "",
+    passwordError: "",
+  });
 
-    const [userDetails, setUserDetails] = useState({
-        email : '',
-        password : '',
-        emailError : false,
-        passwordError : false
-    })
+  const [isDisabled, setIsDisabled] = useState(true)
 
+  function handleOnChange(event) {
+    setUserDetails({
+      ...userDetails,
+      [event.target.name]: event.target.value,
+    });
+  }
 
-    function handleOnChange(event){
-        if(event.target.id === 'loginEmail'){
-        setUserDetails({
-            ...userDetails,
-            email : event.target.value,
-            emailError: false
-        })
-
-        if(event.target.value.length === 0){
-            setUserDetails({
-                ...userDetails,
-                emailError : true,
-                email: ''
-            })
-        }
-
-        if(!(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value))){
-
-            setUserDetails({
-                ...userDetails,
-                emailError: true,
-                email: event.target.value
-            })
-        }
-
-
+  function handleOnBlur(event) {
+    if (event.target.name === "email") {
+      if (userDetails.email === "") {
+        setError({
+          ...error,
+          emailError: "Email cannot be empty",
+        });
+      }
+      else{
+        setError({
+            ...error,
+            emailError: "",
+          });
+      }
     }
-    if(event.target.id === 'loginPassword'){
-        setUserDetails({
-            ...userDetails,
-            password : event.target.value,
-            passwordError: false
-        })
-        if(event.target.value.length === 0){
-            setUserDetails({
-                ...userDetails,
-                passwordError : true,
-                password: ''
-            })
-        }
-        
-    }
+    if (event.target.name === "password") {
+      if (userDetails.password === "") {
+        setError({
+          ...error,
+          passwordError: "Password cannot be empty",
+        });
+      }
+      else{
+        setError({
+            ...error,
+            passwordError: "",
+          });
+      }
     }
 
-    function handleOnSubmit(){
-        console.log(userDetails)
-    }
-    return(
-        <Card sx={{
-            width: 'fit-content',
-            m: 'auto',
-            boxShadow: 12
-        }}>
-            <CardHeader title="LOGIN" />
-            <CardContent sx={{
-                m: 1/2,
-                display: 'flex',
-                flexDirection : 'column',
-                justifyContent : 'space-around',
-                gap: '10px'
-            }}>
-            
-                {/* login TextField */}
-                <TextField
-                required
-                id="loginEmail"
-                label="Email Id"
-                value={userDetails.email}
-                onChange={handleOnChange}
-                helperText={userDetails.emailError ? "Invalid Email" : ""}
-                error = {userDetails.emailError}
-                onBlur= {handleOnChange} /> 
+    if (Object.values(error).every((x) => x === "")) {
+        setIsDisabled(true);
+      }
+      if(Object.values(userDetails).indexOf("")==-1){
 
-                {/* Password TextField */}
-                <TextField
-                type='password'
-                required
-                id="loginPassword"
-                label="Password"
-                value={userDetails.password}
-                onChange={handleOnChange} 
-                onBlur= {handleOnChange}
-                helperText={userDetails.passwordError ? "Password is required" : ""}
-                error = {userDetails.passwordError}
-                />
+        setIsDisabled(false);
+      }
+  }
 
-                {/* Login Button */}
-                <Button variant="contained" onClick={handleOnSubmit} disabled={userDetails.emailError || userDetails.passwordError}>Login</Button>
-                {/* Register Button */}
-                <Button variant="text" href="/register">Register</Button>
+  function handleOnSubmit() {
+    console.log(userDetails);
+  }
+  return (
+    <Card
+      sx={{
+        width: "fit-content",
+        m: "auto",
+        boxShadow: 12,
+      }}
+    >
+      <CardHeader title="LOGIN" />
+      <CardContent
+        sx={{
+          m: 1 / 2,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          gap: "10px",
+        }}
+      >
+        {/* login TextField */}
+        <TextField
+          required
+          name="email"
+          label="Email Id"
+          value={userDetails.email}
+          onChange={handleOnChange}
+          helperText={error.emailError}
+          error={error.emailError === "" ? false : true}
+          onBlur={handleOnBlur}
+        />
 
-            </CardContent>
-        </Card>
-    )
+        {/* Password TextField */}
+        <TextField
+          type="password"
+          required
+          name="password"
+          label="Password"
+          value={userDetails.password}
+          onChange={handleOnChange}
+          helperText={error.passwordError}
+          error={error.passwordError === "" ? false : true}
+          onBlur={handleOnBlur}
+        />
+
+        {/* Login Button */}
+        <Button
+          variant="contained"
+          onClick={handleOnSubmit}
+          disabled={isDisabled}
+        >
+          Login
+        </Button>
+        {/* Register Button */}
+        <Button variant="text" href="/register">
+          Register
+        </Button>
+      </CardContent>
+    </Card>
+  );
 }
 
-export default LoginPage
+export default LoginPage;
