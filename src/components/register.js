@@ -7,6 +7,10 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { userRegister } from "../services/user";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [userDetails, setUserDetails] = useState({
@@ -117,9 +121,34 @@ function Register() {
 
   function handleOnSubmit() {
     console.log(userDetails);
-    console.log(Object.values(error).every((x) => x === ""));
+    userRegister({
+      name: userDetails.name,
+      emailId: userDetails.email,
+      password: userDetails.password,
+      address: userDetails.address,
+      age: userDetails.age,
+    })
+      .then((response) => {
+        console.log(response);
+        toast.success(
+          response,
+          {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          },
+          {
+            onClose: window.location.href = '/login'
+          }
+        );
+      })
+      .catch((err) => console.log(err));
   }
-
 
   return (
     <Card
