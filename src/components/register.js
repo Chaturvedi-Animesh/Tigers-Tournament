@@ -10,7 +10,6 @@ import { useState } from "react";
 import { userRegister } from "../services/user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
 
 function Register() {
   const [userDetails, setUserDetails] = useState({
