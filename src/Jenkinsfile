@@ -5,7 +5,6 @@ node {
 
   stage("Compilation") {
     sh "npm install"
-
   }
 
   stage("Building and Deployment") {
