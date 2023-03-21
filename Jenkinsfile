@@ -4,7 +4,7 @@ node {
   }
 
   stage("Compilation") {
-    sh "npm insatll"
+    sh "npm install"
     
   }
 
