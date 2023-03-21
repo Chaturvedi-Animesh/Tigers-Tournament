@@ -5,6 +5,7 @@ node {
 
   stage("Compilation") {
     sh "npm insatll"
+    
   }
 
   stage("Building and Deployment") {
