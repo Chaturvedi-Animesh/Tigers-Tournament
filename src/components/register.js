@@ -142,7 +142,7 @@ function Register() {
             theme: "dark",
           },
           {
-            onClose: window.location.href = '/login'
+            onClose: (window.location.href = "/login"),
           }
         );
       })
