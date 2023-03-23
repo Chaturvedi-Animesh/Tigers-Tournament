@@ -6,6 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { userLogin } from "../services/user";
 
 function LoginPage() {
   const [userDetails, setUserDetails] = useState({
@@ -64,7 +65,10 @@ function LoginPage() {
   }
 
   function handleOnSubmit() {
-    console.log(userDetails);
+    userLogin(userDetails).then((res) => {
+      console.log(res);
+      window.location.href = "/";
+    });
   }
   return (
     <Card
